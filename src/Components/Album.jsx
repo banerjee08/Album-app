@@ -15,7 +15,7 @@ function Album(props) {
           <div className="album-edit-btn" onClick={props.editAlbum}>
             <img src="./src/assets/edit.png" />
           </div>
-          <div className="album-del-btn">
+          <div className="album-del-btn" onClick={props.deleteAlbum}>
             <img src="./src/assets/cross.png" />
           </div>
         </div>

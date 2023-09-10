@@ -45,6 +45,7 @@ function App() {
         bgColor={album.bgColor}
         edit={editAlbums}
         editAlbum={() => editAlbum(album.id, album.title)}
+        deleteAlbum={() => deleteAlbum(album.id)}
       />
     );
   });
@@ -66,7 +67,7 @@ function App() {
     });
   }
 
-  console.log(formData);
+  // console.log(formData);
   // function newAlbumDetails(event) {
   //   setFormData((prevFormData) => {
   //     return {
@@ -148,6 +149,29 @@ function App() {
     setEditAlbums(true)
     setModal(true)
   }
+
+  function deleteAlbum(id) {
+    setSelectedAlbumId(id)
+    fetch(`https://jsonplaceholder.typicode.com/albums/${selectedAlbumId}`, {
+      method: 'DELETE',
+      headers: {
+        contentType: 'application/json',
+      },
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not okay');
+        }
+        return res.json();
+      })
+      .then(data => {
+        const updatedAlbums = albumArray.filter(album => album.id !== id);
+        setAlbumArray(updatedAlbums);
+      })
+      .catch(err => {
+        console.log('Error deleting album: ', err)
+      })
+   }
 
   return (
     <>
