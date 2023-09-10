@@ -12,7 +12,6 @@ function App() {
     addTitle: '',
     editTitle: '',
   });
-  
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/albums')
@@ -21,30 +20,22 @@ function App() {
         const albums = data.slice(0, 9).map((album) => ({
           id: album.id,
           title: album.title,
-          bgColor: '',
+          bgColor: getRandomColor(),
         }));
         setAlbumArray(albums);
-
-        fetch('https://www.colr.org/json/color/random')
-          .then((res) => res.json())
-          .then(data => {
-            console.log(data)
-            const colors = data.colors;
-            const albumWithColorBg = colors.map(color => {
-              return {
-                
-              }
-            })
-          })
       });
-    
   }, []);
 
-  // useEffect(() => {
-  //   fetch('https://www.colr.org/json/color/random')
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data.colors[0].hex));
-  // }, [albumArray]);
+  console.log(albumArray);
+
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 
   const albumList = albumArray.map((album) => {
     return (
@@ -52,7 +43,7 @@ function App() {
         key={album.id}
         id={album.id}
         title={album.title}
-        image={album.image}
+        bgColor={album.bgColor}
         edit={edit}
       />
     );
@@ -97,17 +88,19 @@ function App() {
           {
             id: data.id,
             title: data.title,
-            image: '',
+            bgColor: getRandomColor(),
           },
         ]);
       });
 
+    // Setting the input field to empty
     setFormData((prevData) => ({
       ...prevData,
       addTitle: '',
     }));
 
-    setAddNewAlbum((prevState) => (!prevState))
+    // Closing the modal
+    setAddNewAlbum((prevState) => !prevState);
   }
 
   return (

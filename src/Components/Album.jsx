@@ -1,7 +1,7 @@
 function Album(props) {
-  //   console.log(props)
+    console.log(props)
   const styles = {
-    // background: `url(${props.image})`,
+    backgroundColor: props.bgColor,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
       zIndex: -1,
