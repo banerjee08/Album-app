@@ -1,5 +1,5 @@
 function Album(props) {
-    console.log(props)
+    // console.log(props)
   const styles = {
     backgroundColor: props.bgColor,
     backgroundPosition: 'center',
@@ -12,7 +12,7 @@ function Album(props) {
     <div className="album-container">
       {props.edit && (
         <div className="album-btns">
-          <div className="album-edit-btn">
+          <div className="album-edit-btn" onClick={props.editAlbum}>
             <img src="./src/assets/edit.png" />
           </div>
           <div className="album-del-btn">

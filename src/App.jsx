@@ -6,8 +6,8 @@ import Modal from './Components/Modal';
 
 function App() {
   const [albumArray, setAlbumArray] = useState([]);
-  const [addNewAlbum, setAddNewAlbum] = useState(false);
-  const [edit, setEdit] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [editAlbums, setEditAlbums] = useState(false);
   const [formData, setFormData] = useState({
     addTitle: '',
     editTitle: '',
@@ -26,8 +26,6 @@ function App() {
       });
   }, []);
 
-  console.log(albumArray);
-
   function getRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -44,17 +42,18 @@ function App() {
         id={album.id}
         title={album.title}
         bgColor={album.bgColor}
-        edit={edit}
+        edit={editAlbums}
+        editAlbum={() => editAlbum(album.id)}
       />
     );
   });
 
   function editAlbumList() {
-    setEdit((prevState) => !prevState);
+    setEditAlbums((prevState) => !prevState);
   }
 
   function addAlbum() {
-    setAddNewAlbum((prevState) => !prevState);
+    setModal((prevState) => !prevState);
   }
 
   function newAlbumDetails(event) {
@@ -65,7 +64,6 @@ function App() {
       };
     });
   }
-  // console.log(formData)
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -100,7 +98,13 @@ function App() {
     }));
 
     // Closing the modal
-    setAddNewAlbum((prevState) => !prevState);
+    setModal((prevState) => !prevState);
+  }
+
+  function editAlbum(event) {
+    // console.log('edit album')
+    // console.log(event)
+    event ? setModal(true) : ""
   }
 
   return (
@@ -127,8 +131,9 @@ function App() {
 
       {/* Modal */}
       <Modal
-        addNewAlbum={addNewAlbum}
+        modal={modal}
         newAlbumDetails={newAlbumDetails}
+        edit={editAlbums}
         value={formData.addTitle}
         handleSubmit={handleSubmit}
       />
