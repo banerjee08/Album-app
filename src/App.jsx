@@ -167,11 +167,16 @@ function App() {
       .then(data => {
         const updatedAlbums = albumArray.filter(album => album.id !== id);
         setAlbumArray(updatedAlbums);
+        // setEditAlbums(false)
       })
       .catch(err => {
         console.log('Error deleting album: ', err)
       })
-   }
+  }
+  
+  function closeModal() {
+    setModal(false)
+  }
 
   return (
     <>
@@ -202,6 +207,7 @@ function App() {
         edit={editAlbums}
         value={formData.addTitle}
         handleSubmit={handleSubmit}
+        closeModal={closeModal}
       />
     </>
   );
