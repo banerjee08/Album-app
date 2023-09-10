@@ -12,10 +12,10 @@ function Album(props) {
       {props.edit && (
         <div className="album-btns">
           <div className="album-edit-btn" onClick={props.editAlbum}>
-            <img src="./src/assets/edit.png" />
+            <img src="./edit.png" />
           </div>
           <div className="album-del-btn" onClick={props.deleteAlbum}>
-            <img src="./src/assets/cross.png" />
+            <img src="./cross.png" />
           </div>
         </div>
       )}

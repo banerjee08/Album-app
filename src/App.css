@@ -96,6 +96,7 @@
   top: 95px;
   left: 80px;
   z-index: 5;
+  cursor: pointer;
 }
 
 .album-edit-btn img,

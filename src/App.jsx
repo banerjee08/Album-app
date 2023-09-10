@@ -191,12 +191,12 @@ function App() {
 
           {/* edit button */}
           <div className="edit-btn" onClick={editAlbumList}>
-            <img src="./src/assets/edit.png" />
+            <img src="/edit.png" />
           </div>
 
           {/* add album button */}
           <div className="add-btn" onClick={addAlbum}>
-            <img src="./src/assets/plus.png" />
+            <img src="/plus.png" />
           </div>
         </main>
       </div>

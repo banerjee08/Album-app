@@ -2,7 +2,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <img
-        src="./src/assets/wave-sound.png"
+        src="/wave-sound.png"
         alt="Buzz itt logo"
         className="logo"
       />
