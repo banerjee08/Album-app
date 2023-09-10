@@ -1,11 +1,10 @@
 function Album(props) {
-    // console.log(props)
   const styles = {
     backgroundColor: props.bgColor,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
-      zIndex: -1,
-    opacity: props.edit ? 0.3 : 0.8
+    zIndex: -1,
+    opacity: props.edit ? 0.3 : 0.8,
   };
 
   return (

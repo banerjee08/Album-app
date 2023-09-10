@@ -5,6 +5,7 @@ import Album from './Components/Album';
 import Modal from './Components/Modal';
 
 function App() {
+  // States used in the project
   const [albumArray, setAlbumArray] = useState([]);
   const [modal, setModal] = useState(false);
   const [editAlbums, setEditAlbums] = useState(false);
@@ -14,6 +15,7 @@ function App() {
     editTitle: '',
   });
 
+  // fetching data from the API and setting it in the albumArray
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/albums')
       .then((res) => res.json())
@@ -58,6 +60,7 @@ function App() {
     setModal((prevState) => !prevState);
   }
 
+  // function to add new Album details
   function newAlbumDetails(event) {
     setFormData((prevFormData) => {
       return {
@@ -67,19 +70,11 @@ function App() {
     });
   }
 
-  // console.log(formData);
-  // function newAlbumDetails(event) {
-  //   setFormData((prevFormData) => {
-  //     return {
-  //       ...prevFormData,
-  //       [event.target.name]: event.target.value,
-  //     };
-  //   });
-  // }
-
+  // function handleSubmit for adding and editing an album
   function handleSubmit(event) {
     event.preventDefault();
 
+    // Adding a new album
     if (!editAlbums) {
       const newAlbum = {
         title: formData.addTitle,
@@ -104,11 +99,14 @@ function App() {
             },
           ]);
         });
-    } else {
+    }
+
+    //Editing an existing album
+    else {
       const updatedTitle = formData.editTitle;
       const updatedAlbum = {
         title: updatedTitle,
-      }
+      };
 
       fetch(`https://jsonplaceholder.typicode.com/albums/${selectedAlbumId}`, {
         method: 'PUT',
@@ -117,15 +115,15 @@ function App() {
         },
         body: JSON.stringify(updatedAlbum),
       })
-        .then(res => res.json())
-          .then(data => {
-            const updatedAlbums = albumArray.map((album) => 
-              album.id === selectedAlbumId
-                ? { ...album, title: updatedTitle }
-                : album
-            )
-            setAlbumArray(updatedAlbums);
-        })
+        .then((res) => res.json())
+        .then((data) => {
+          const updatedAlbums = albumArray.map((album) =>
+            album.id === selectedAlbumId
+              ? { ...album, title: updatedTitle }
+              : album
+          );
+          setAlbumArray(updatedAlbums);
+        });
     }
 
     // Setting the input field to empty
@@ -137,45 +135,48 @@ function App() {
 
     // Closing the modal
     setModal((prevState) => !prevState);
-    setEditAlbums(false)
+
+    setEditAlbums(false);
   }
 
+  // function to delete the album
   function editAlbum(id, title) {
-    setSelectedAlbumId(id)
+    setSelectedAlbumId(id);
     setFormData((prevData) => ({
       ...prevData,
       editTitle: title,
-    }))
-    setEditAlbums(true)
-    setModal(true)
+    }));
+    setEditAlbums(true);
+    setModal(true);
   }
 
+  // function to delete album
   function deleteAlbum(id) {
-    setSelectedAlbumId(id)
+    setSelectedAlbumId(id);
     fetch(`https://jsonplaceholder.typicode.com/albums/${selectedAlbumId}`, {
       method: 'DELETE',
       headers: {
         contentType: 'application/json',
       },
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) {
           throw new Error('Network response was not okay');
         }
         return res.json();
       })
-      .then(data => {
-        const updatedAlbums = albumArray.filter(album => album.id !== id);
+      .then((data) => {
+        const updatedAlbums = albumArray.filter((album) => album.id !== id);
         setAlbumArray(updatedAlbums);
-        // setEditAlbums(false)
       })
-      .catch(err => {
-        console.log('Error deleting album: ', err)
-      })
+      .catch((err) => {
+        console.log('Error deleting album: ', err);
+      });
   }
-  
+
+  // Function to close modal
   function closeModal() {
-    setModal(false)
+    setModal(false);
   }
 
   return (

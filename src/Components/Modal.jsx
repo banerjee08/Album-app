@@ -1,10 +1,9 @@
 function Modal(props) {
-//   console.log(props);
   return (
     props.modal && (
       <div className="modal-container">
         {/* Modal close Button */}
-        <div className="close-modal-container" onClick={props.closeModal} >
+        <div className="close-modal-container" onClick={props.closeModal}>
           <button className="close-modal-btn">X</button>
         </div>
 

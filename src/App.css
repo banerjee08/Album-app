@@ -37,7 +37,7 @@
   width: 42px;
 }
 
-.album-container{
+.album-container {
   position: relative;
 }
 
@@ -60,8 +60,8 @@
   /* border: 1px solid pink; */
 }
 
-.album-blur{
-  opacity: 0.3
+.album-blur {
+  opacity: 0.3;
 }
 
 .album-title {
@@ -89,7 +89,7 @@
   right: 15px;
 }
 
-.album-btns{
+.album-btns {
   display: flex;
   gap: 5px;
   position: absolute;
@@ -99,11 +99,11 @@
 }
 
 .album-edit-btn img,
-.album-del-btn img{
+.album-del-btn img {
   height: 45px;
 }
 
-.submit-btn{
+.submit-btn {
   border: none;
   background-color: black;
   color: #fff;
@@ -115,15 +115,15 @@
 }
 
 .submit-btn:hover,
-.submit-btn:active{
-  color:rgba(29, 185, 84, 1)
+.submit-btn:active {
+  color: rgba(29, 185, 84, 1);
 }
 
-.submit-btn:active{
+.submit-btn:active {
   transform: scale(0.9);
 }
 
-.close-modal-btn{
+.close-modal-btn {
   font-size: 20px;
   font-weight: bold;
   background-color: transparent;
@@ -132,16 +132,16 @@
 }
 
 .close-modal-btn:hover,
-.close-modal-btn:active{
+.close-modal-btn:active {
   color: red;
   cursor: pointer;
 }
 
 /* Modal */
-.modal-container{
-  height: 250px;
+.modal-container {
+  height: 220px;
   width: 70%;
-  background-color:rgba(29, 185, 84, 1);
+  background-color: rgba(29, 185, 84, 1);
   border-radius: 8px;
   box-shadow: 0px 10px 30px 0px rgba(29, 185, 84, 1);
   position: fixed;
@@ -156,16 +156,16 @@
   z-index: 10;
 }
 
-.close-modal-container{
+.close-modal-container {
   margin-left: auto;
 }
 
-.modal-title{
+.modal-title {
   margin: 0 auto 15px;
   font-size: 32px;
 }
 
-form{
+form {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -173,21 +173,9 @@ form{
 }
 
 .input-add-title,
-.input-edit-title{
+.input-edit-title {
   border: none;
   height: 30px;
   border-radius: 5px;
   font-size: 16px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
