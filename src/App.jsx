@@ -12,6 +12,7 @@ function App() {
     addTitle: '',
     editTitle: '',
   });
+  
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/albums')
