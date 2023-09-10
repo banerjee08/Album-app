@@ -8,6 +8,7 @@ function App() {
   const [albumArray, setAlbumArray] = useState([]);
   const [modal, setModal] = useState(false);
   const [editAlbums, setEditAlbums] = useState(false);
+  const [selectedAlbumId, setSelectedAlbumId] = useState(false);
   const [formData, setFormData] = useState({
     addTitle: '',
     editTitle: '',
@@ -43,7 +44,7 @@ function App() {
         title={album.title}
         bgColor={album.bgColor}
         edit={editAlbums}
-        editAlbum={() => editAlbum(album.id)}
+        editAlbum={() => editAlbum(album.id, album.title)}
       />
     );
   });
@@ -65,46 +66,87 @@ function App() {
     });
   }
 
+  console.log(formData);
+  // function newAlbumDetails(event) {
+  //   setFormData((prevFormData) => {
+  //     return {
+  //       ...prevFormData,
+  //       [event.target.name]: event.target.value,
+  //     };
+  //   });
+  // }
+
   function handleSubmit(event) {
     event.preventDefault();
-    const newAlbum = {
-      title: formData.addTitle,
-      userId: albumArray.length + 1,
-    };
 
-    fetch('https://jsonplaceholder.typicode.com/albums', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newAlbum),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setAlbumArray((prevAlbums) => [
-          ...prevAlbums,
-          {
-            id: data.id,
-            title: data.title,
-            bgColor: getRandomColor(),
-          },
-        ]);
-      });
+    if (!editAlbums) {
+      const newAlbum = {
+        title: formData.addTitle,
+        userId: albumArray.length + 1,
+      };
+
+      fetch('https://jsonplaceholder.typicode.com/albums', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newAlbum),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setAlbumArray((prevAlbums) => [
+            ...prevAlbums,
+            {
+              id: data.id,
+              title: data.title,
+              bgColor: getRandomColor(),
+            },
+          ]);
+        });
+    } else {
+      const updatedTitle = formData.editTitle;
+      const updatedAlbum = {
+        title: updatedTitle,
+      }
+
+      fetch(`https://jsonplaceholder.typicode.com/albums/${selectedAlbumId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedAlbum),
+      })
+        .then(res => res.json())
+          .then(data => {
+            const updatedAlbums = albumArray.map((album) => 
+              album.id === selectedAlbumId
+                ? { ...album, title: updatedTitle }
+                : album
+            )
+            setAlbumArray(updatedAlbums);
+        })
+    }
 
     // Setting the input field to empty
     setFormData((prevData) => ({
       ...prevData,
       addTitle: '',
+      editTitle: '',
     }));
 
     // Closing the modal
     setModal((prevState) => !prevState);
+    setEditAlbums(false)
   }
 
-  function editAlbum(event) {
-    // console.log('edit album')
-    // console.log(event)
-    event ? setModal(true) : ""
+  function editAlbum(id, title) {
+    setSelectedAlbumId(id)
+    setFormData((prevData) => ({
+      ...prevData,
+      editTitle: title,
+    }))
+    setEditAlbums(true)
+    setModal(true)
   }
 
   return (

@@ -1,5 +1,5 @@
 function Modal(props) {
-  console.log(props);
+//   console.log(props);
   return (
     props.modal && (
       <div className="modal-container">
@@ -9,27 +9,31 @@ function Modal(props) {
         </div>
 
         {/* Title */}
-        <h3 className="modal-title">{props.edit ? "Edit Title" : "Add Title"}</h3>
+        <h3 className="modal-title">
+          {props.edit ? 'Edit Title' : 'Add Title'}
+        </h3>
 
         {/* Form */}
         <form onSubmit={props.handleSubmit}>
           {/* Add Title Input field */}
-          {!props.edit ? <input
-            type="text"
-            placeholder="Add Title"
-            onChange={props.newAlbumDetails}
-            name="addTitle"
-            className="input-add-title"
-            value={props.value}
-                  />
-                      
-          : <input
-            type="text"
-            placeholder="Edit Title"
-            //   onChange={handleChange}
-            name="editTitle"
-            className="input-edit-title"
-          />}
+          {!props.edit ? (
+            <input
+              type="text"
+              placeholder="Add Title"
+              onChange={props.newAlbumDetails}
+              name="addTitle"
+              className="input-add-title"
+              value={props.value}
+            />
+          ) : (
+            <input
+              type="text"
+              placeholder="Edit Title"
+              onChange={props.newAlbumDetails}
+              name="editTitle"
+              className="input-edit-title"
+            />
+          )}
 
           {/* Submit button */}
           <button className="submit-btn">Submit</button>
